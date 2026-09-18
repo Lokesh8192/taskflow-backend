@@ -2,9 +2,13 @@ services:
   - type: web
     name: taskflow-backend
     runtime: python
+
     buildCommand: "pip install -r requirements.txt && alembic upgrade head"
+
     startCommand: "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+
     healthCheckPath: /health
+
     envVars:
       - key: DATABASE_URL
         sync: false
@@ -13,7 +17,7 @@ services:
         sync: false
 
       - key: ALGORITHM
-        value: HS256
+        value: "HS256"
 
       - key: ACCESS_TOKEN_EXPIRE_MINUTES
         value: "30"
@@ -22,7 +26,7 @@ services:
         value: "7"
 
       - key: APP_ENV
-        value: production
+        value: "production"
 
       - key: LOG_LEVEL
-        value: INFO
+        value: "INFO"
